@@ -1,4 +1,4 @@
-import { HeadFC, graphql } from 'gatsby';
+import { HeadFC, graphql, Link } from 'gatsby';
 import React from 'react';
 
 export const Head: HeadFC = () => <title>Blog Page</title>
@@ -10,6 +10,7 @@ export const query = graphql`
         frontmatter {
           title
           date(formatString: "MMMM DD, YYYY")
+          slug
         }
         id
         excerpt
@@ -30,6 +31,9 @@ export default function BlogPage(props: any) {
             <h2>{node.frontmatter.title}</h2>
             <p>Posted: {node.frontmatter.date}</p>
             <p>{node.excerpt}</p>
+            <Link to={`/blog/${node.frontmatter.slug}`}>
+              {node.frontmatter.title}
+            </Link>
           </article>
         ))
       }
